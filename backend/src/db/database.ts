@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { env } from '../config/env.js';
 import { CREATE_TABLES_SQL } from './schema.js';
@@ -7,7 +8,16 @@ import { CREATE_TABLES_SQL } from './schema.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbPath = path.resolve(__dirname, '../../', env.DATABASE_PATH);
+const dbPath = path.isAbsolute(env.DATABASE_PATH)
+  ? env.DATABASE_PATH
+  : path.resolve(__dirname, '../../', env.DATABASE_PATH);
+
+// Ensure persistent volume directory exists (e.g., /data)
+const dbDir = path.dirname(dbPath);
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
+
 export const db = new Database(dbPath);
 
 // Enable foreign keys and PRAGMAs

@@ -1,0 +1,6 @@
+{
+  "name": "DiplomaPrep AI",
+  "description": "MSBTE 'I' Scheme Exam Prep & AI Tutor for TY Diploma Engineering students with targeted MCQs, analytics, and intelligent explanations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

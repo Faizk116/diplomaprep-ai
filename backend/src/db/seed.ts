@@ -4,7 +4,8 @@ import { db, initDatabase } from './database.js';
 export function seedDatabase() {
   initDatabase();
 
-  // 1. Seed Demo User
+  const performSeed = db.transaction(() => {
+    // 1. Seed Demo User
   const existingUser = db.prepare('SELECT id FROM users WHERE id = ?').get('demo-pooja');
   if (!existingUser) {
     const passwordHash = bcrypt.hashSync('demoPassword123', 10);
@@ -259,6 +260,9 @@ export function seedDatabase() {
       }
     }
   }
+  });
+
+  performSeed();
 }
 
 // Execute seed if run directly

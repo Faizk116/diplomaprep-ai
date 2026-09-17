@@ -12,14 +12,6 @@ coverage/
 .env*
 !.env.example
 
-# SQLite Database & WAL files (production & local)
-*.sqlite
-*.sqlite-wal
-*.sqlite-shm
-*.db
-backend/database.sqlite*
-backend/data/
-
 # OS & Logs
 .DS_Store
 *.log
